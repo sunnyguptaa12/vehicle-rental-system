@@ -126,13 +126,14 @@ jdbc:mysql://AIVEN_HOST:AIVEN_PORT/vehicle_rental_db?sslMode=REQUIRED
 ### 2. Deploy the backend to Render
 
 1. Push this repository to GitHub and create a Render Blueprint from it using `render.yaml`.
-2. Set the Blueprint's environment variables in Render:
+2. The Blueprint uses Render's Free web-service plan. Free services can spin down after inactivity and may take about a minute to start on the next request; check Render's current limits before relying on it for production.
+3. Set the Blueprint's environment variables in Render:
    - `DB_URL`: the Aiven JDBC URL above
    - `DB_USERNAME` and `DB_PASSWORD`: the Aiven database credentials
    - `ADMIN_USERNAME`: the admin username you choose
    - `ADMIN_PASSWORD`: a unique password of at least 12 characters
    - `CORS_ALLOWED_ORIGINS`: initially set the Vercel origin you plan to use (no trailing slash)
-3. Deploy and verify `https://YOUR-RENDER-SERVICE.onrender.com/api/health` returns HTTP 200.
+4. Deploy and verify `https://YOUR-RENDER-SERVICE.onrender.com/api/health` returns HTTP 200.
 
 The configured admin user is created/updated from Render environment variables at backend startup. Never use the local demo credentials on a public deployment.
 
